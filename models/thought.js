@@ -12,9 +12,9 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now(),
-            get: (createdAtVal) => createdAtVal.toISOString() 
-            // createdAt: {type: Date, default: Date.now},
-            // updatedAt: {type: Date, default: Date.now, set: v => v.Date.now()}
+            // get: (createdAtVal) => createdAtVal.toISOString() 
+            createdAt: { type: Date, default: Date.now },
+            updatedAt: { type: Date, default: Date.now, set: v => v.Date.now() }
         },
         username: {
             type: String,
@@ -35,4 +35,4 @@ thoughtSchema.virtual('reactionCount').get(function() {
 
 const Thought = model('Thought', thoughtSchema);
 
-module.exports = Thought;
+module.exports = { Thought };
