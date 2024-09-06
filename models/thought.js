@@ -1,6 +1,6 @@
-//const { match } = require('assert');
 const { Schema, model} = require('mongoose');
 const reactionSchema = require('./reaction');
+
 const thoughtSchema = new Schema(
     {
         thoughtText: {
@@ -11,9 +11,7 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
-            // get: (createdAtVal) => createdAtVal.toISOString() 
-            createdAt: { type: Date, default: Date.now },
+            default: Date.now,
             updatedAt: { type: Date, default: Date.now, set: v => v.Date.now() }
         },
         username: {
@@ -35,4 +33,4 @@ thoughtSchema.virtual('reactionCount').get(function() {
 
 const Thought = model('Thought', thoughtSchema);
 
-module.exports = { Thought };
+module.exports = Thought;
