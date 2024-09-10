@@ -22,21 +22,21 @@ module.exports = {
     }
   },
 
-  async createUsers(req, res) {
+  async createUser(req, res) {
     try {
       const user = await User.create(req.body);
-      res.json(200).json(user);
+      
+      res.status(200).json(user);
     } catch (err) {
       console.log(err)
       res.status(500).json(err);
     }
   },
-  async deleteUsers(req, res) {
+  async deleteUser(req, res) {
     console.log('Request: ', req.params);
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userId });
-      res.json(user);
-
+      
       await Thought.deleteMany({ _id: { $in: user.thought } });
       res.json({ message: 'User and thoughts are deleted' });
     } catch (err) {
@@ -44,7 +44,8 @@ module.exports = {
     }
   },
 
-  async updateUsers(req, res) {
+  async updateUser(req, res) {
+
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
@@ -56,4 +57,33 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  async addFriend(req, res) {
+    try {
+      const friend = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $push: { friends: req.params.friendId }},
+        { new: true }
+      )
+
+      res.status(200).json(friend);
+    } catch(err) {
+      res.status(500).json(err);
+      
+    }
+  },
+  async removeFriend(req, res) {
+    try {
+      const friend = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friends: req.params.friendId }},
+        { new: true }
+      )
+  
+      res.status(200).json(friend);
+    } catch(err) {
+      res.status(500).json(err);
+      
+    }    
+  }
 };

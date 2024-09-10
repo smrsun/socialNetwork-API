@@ -18,9 +18,11 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtVal) => createdAtVal.toISOString()
-      // createdAt: {type: Date, default: Date.now},
-      // updatedAt: {type: Date, default: Date.now, set: v => v.Date.now()}
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+      set: (v) => v.Date.now(),
     },
   },
   {
