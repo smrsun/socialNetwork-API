@@ -10,4 +10,5 @@ My task was to build an API for a social network web application where users can
 ## Links to Repo 
 
 [Social Network GitHub Repo](https://github.com/smrsun/socialNetwork-API) 
+
 [Link to my personal GitHub](https://github.com/smrsun) 
